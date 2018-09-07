@@ -1,0 +1,45 @@
+.fraction {
+    display:inline-block;
+    vertical-align: middle;
+    margin: 0 0.2em 0.4ex;
+    text-align: center;
+}
+.fraction > span {
+    display: block;
+    padding-top: 0.15em;
+}
+.fraction span.fdn {border-top: thin solid white;}
+.fraction span.bar {display: None;}
+#all{
+  letter-spacing: 2px;
+  line-height: 30px;
+  word-spacing: 3px;
+  width:690px;
+  height:640px;
+  color:white;
+  margin-left: auto;
+  margin-right: auto;
+  top:0px;
+  left:0px;
+  position:absolute;
+  background-color: rgba(0, 0, 0, 0);
+}
+p,pre,.au{
+  letter-spacing: 2px;
+  word-spacing: 3px;
+  line-height: 30px;
+  color:white;
+}
+p{
+  line-height:10px;
+}
+h2{
+  border-width: 1px;
+  line-height: 35px;
+  border-style: solid;
+  border-color: white;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 40px;
+  padding: 10px;
+}

@@ -1,0 +1,24 @@
+<html>
+<head>
+<title> Model-Comparison-Cls-Imb</title>
+<link rel="stylesheet" href="style1.css">
+</head>
+<body>
+	<div id="all">
+    <h2>Implementation:</h2>
+    <p>for i=1:Nboost</p>
+    <div style="line-height:6px;position:relative;left:30px;">
+      <pre>C{i} = train(X,Y,wts);      <span style="color:green;">% Train a weighted classifier</span></pre>
+      <Pre>Yhat = predict(C{i},X);     <span style="color:green;">% compute predictions</span></pre>
+      <pre>e = wts*(Y~=Yhat);         <span style="color:green;">% compute weighted error rate</span></pre>
+      <pre>alpha(i) = .5 log(1-e)/e;    <span style="color:green;">% compute coefficient</span></pre>
+      <pre>wts *= exp(-alpha(i)*Y*Yhat); <span style="color:green;">% Update weights</span></pre>
+      <pre>wts = wts/sum(wts);</pre>
+    </div>
+    <p>end;</p>
+    <p style="color:green;">% reFinal classifier: </p>
+    <p>( \sum alpha(i)*predict(C{i},Xtest) ) > 0</p>
+  </div>
+  
+</body>
+</html>

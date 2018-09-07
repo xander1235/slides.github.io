@@ -8,19 +8,254 @@
 <body onkeypress="change(event)">
   <h1> Models Comparison Class Imbalance</h1><br>
   <div id = "intro">
-    <h2> Introduction:</h2><br>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.  autoencoder</p>
+    <h2>Introduction:</h2><br>
+    <ul>
+      <li>Class Imbalance is a special type of problem in machine learning where the number of examples of one class is higher than the number of examples of other classes.</li>
+      <li>This problem is more prevalent in medical datasets and due to the rare occurrence of diseased over non-diseased.</li>
+      <li>So usual techniques on this dataset will be inappropriate. So, we use a technique called two phase training to mitigate this problem and we have chosen breast cancer dataset.</li>
+    </ul>
   </div>
 
-  <div id = "encode">
-    <h2>Autoencoder:</h2><br>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. adaboost</p>
+  <div class="ppt" id = "abstract">
+    <h2>Abstract:</h2><br>
+    <ul>
+      <li>Dataset contain images containing nuclei.</li>
+      <li>Next we segment out 80X80 patches of cells from High Power Fields(HPF) given in dataset using blue ratio, global binary thresholding(otsu method) , morphological operations and flood fill algorithm techniques.</li>
+      <li>We perform problem 2-phase training is segmented data.</li>
+    </ul>
+  </div>
+  <div class="ppt" id = "dataset">
+    <h2>Dataset:</h2><br>
+    <ul>
+      <li>Contain HPF images which contains nucleus of mitotic and non mitotic.</li>
+      <li>So the mitotic is a cancer cell.</li>
+      <li>Mitotic count is an important feature to detect cancer.</li>
+      <li>And csv file containing pixels of only mitotic images are provided.</li>
+      <li>So we need to extract all other non mitotic .</li>
+    </ul>
   </div>
 
-  <div id="ada">
-    <h2>AdaBoost:</h2><br>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i onclick="upload()">carousel</i> </p>
+  <div class="ppt" id = "segment">
+    <h2>Segmentation:</h2><br>
+    <ul>
+      <li>Blue Ratio Histogram:</li>
+      <li>Global Binary Thresholding using Otsu's Method:</li>
+      <li>Otsu's Method:</li>
+      <li>Morphological operations (to reduce noise):</li>
+      <li>Flood filling and Labeling:</li>
+    </ul>
   </div>
+
+  <div class="ppt" id = "brh">
+    <h2>Blue Ratio Histogram:</h2><br>
+    <ul>
+      <li>The tissue is injected with H, which makes the nuclei appear bluish.</li>
+      <li>To calculate the “blueness” of a pixel, we use a property called blue ratio.</li>
+      <li>BR = <div class="fraction">
+                  <span class="fup">(100 x B)</span>
+                  <span class="bar">\</span>
+                  <span class="fdn">(1+R+G)</span>
+               </div>
+           x <div class="fraction">
+                <span class="fup">256</span>
+                <span class="bar">/</span>
+                <span class="fdn">(1+R+G+B)</span>
+              </div></li>
+    </ul>
+  </div>
+
+  <div class="ppt" id = "gbtuom">
+    <h2>Global Binary Thresholding using Otsu's Method:</h2><br>
+    <ul>
+      <li>To separate the pixels of the nuclei from the pixels of background.</li>
+      <li>Pixels above T  are considered as white and below as  blacks.</li>
+      <li>To do this optimally, we decide the value of T using Otsu's method.</li>
+    </ul>
+  </div>
+
+  <div class="ppt" id = "otsu">
+    <h2>Otsu's Method:</h2><br>
+    <ul>
+      <li>Otsu method is a statistical method to find the optimum threshold value.</li>
+      <li>This  is optimum because it maximises the intra-class variance.</li>
+      <li>It is fast and simple when compared to other statistical methods because it is based on computations performed on the histogram of an image which is easily obtainable.</li>
+    </ul>
+  </div>
+
+  <div class="ppt" id = "mo">
+    <h2>Morphological operations (to reduce noise):</h2><br>
+    <ul>
+      <li>Series of dilation and erosion operations are applied to remove noise.</li>
+    </ul>
+  </div>
+
+  <div class="ppt" id = "ffl">
+    <h2>Flood filling and Labeling:</h2><br>
+    <ul>
+      <li><b>Flood Filling:</b> As we know the pixels of nuclei are white(BRH), we use flood fill algorithm to enlist all the pixels in the images of individual nuclei. We need all the pixels to find the centroid of the blob which we use to create 80*80 patches.</li>
+      <li><b>Labeling:</b> we label the images of nuclei from the segmentation module, using the pixels of mitotic images given.</li>
+    </ul>
+  </div>
+
+  <div class="ppt" id = "wac">
+    <h2>Ways to address class Imbalance problem:</h2><br>
+    <ul>
+      <li><b>Data based Methods:</b>Includes Undersampling and Oversampling.</li>
+      <li><b>Model based methods:</b>This model concentrate more on difficult examples or Minority class.</li>
+      <li><b>Hybrid methods:</b>In which sampling strategies are integrated with model based tuning.</li>
+    </ul>
+  </div>
+
+  <div class="ppt" id = "dio">
+    <h2>Difficulties in oversampling:</h2><br>
+    <ul>
+      <li>SMOTE is an important example.</li>
+      <li>It doesn't work on high dimensional data.</li>
+      <li>Close similarity between mitotic and non-mitotic.</li>
+      <li>Labeling again the new images is difficult even to pathologist.</li>
+    </ul>
+  </div>
+
+  <div class="ppt" id = "dir">
+    <h2>Difficulties in random undersampling:</h2><br>
+    <ul>
+      <li>If random undersampling is performed then there is a chance that whole type is pruned.</li>
+      <img src="">
+    </ul>
+  </div>
+
+  <div class="ppt" id = "2pt">
+    <h3 style="color:white;top:150px;left:110px;font-size:40px;position:relative;">Two phase training</h3><br>
+  </div>
+
+  <div class="ppt" id = "p1">
+    <h2>Phase 1 (for selective pruning):</h2><br>
+    <ul>
+      <li>Initial epochs are trained on cnn model which is taken reference from standard architecture used on similar dataset.</li>
+      <li>And using this we divide non mitotic  into easy medium and hard based on confidence score.</li>
+      <li>The splitting criterion is chosen such that  data after pruning will be closer to minority classes.</li>
+    </ul>
+  </div>
+
+  <div class="ppt" id = "km">
+    <h2>kmeans:</h2><br>
+    <ul>
+      <li>So the easy samples are clustered and 40% images from each cluster is selected.</li>
+      <h4 style="line-height:5px;">Kmeans:</h4>
+      <div style="line-height:6px;position:relative;left:30px;">
+        <p>Select random means</p>
+        <P><b>Repeat:</b></p>
+        <p>Cluster images to means.</p>
+        <p>Find new means.</p>
+        <p><b>until : no change in  means.</b></p>
+      </div>
+      <li>Value of k is empirically chosen.</li>
+    </ul>
+  </div>
+
+  <div class="ppt" id = "aug">
+    <h2>Augmentation:</h2><br>
+    <p>The hard and mitotic tuples are rotated 90 degree and each image is flipped.</p>
+    <p>So that we get 7 more images:</p>
+  </div>
+
+  <div class="ppt" id = "p2">
+    <h2>Phase 2:</h2><br>
+    <ul>
+      <li>Easy,medium, augmented hard , mitotic are combined to balanced dataset.</li>
+      <li>This is used to train the 5-epoch model for further iteration.</li>
+      <li>And this is evaluated using f-measure as metrics.</li>
+    </ul>
+  </div>
+
+  <div class="ppt" id = "f-m">
+    <h2>f-measure:</h2><br>
+    <ul>
+      <li>Precision = <div class="fraction">
+                        <span class="fup">TP</span>
+                        <span class="bar">/</span>
+                        <span class="fdn">(TP+FP)</span>
+                      </div></li>
+      <li>Recall = <div class="fraction">
+                  <span class="fup">TP</span>
+                  <span class="bar">\</span>
+                  <span class="fdn">(TP+FN)</span>
+               </div></li>
+      <li>F-measure = 2 x <div class="fraction">
+                  <span class="fup">(Precision x Recall)</span>
+                  <span class="bar">\</span>
+                  <span class="fdn">(Precision + Recall)</span>
+               </div></li>
+    </ul>
+  </div>
+
+  <div class="ppt" id = "adv">
+    <h2>ADVANTAGES:</h2><br>
+    <ul>
+      <li>This is a databased technique where we undersample the images with less information loss.</li>
+      <li>Here we cluster the selected majority class examples and undersample from each cluster.</li>
+      <li>By doing this we can overcome losing of entire type of images, which is the case with random undersampling.</li>
+    </ul>
+  </div>
+
+  <div class="ppt" id = "ada">
+    <h2>Adaboost:</h2><br>
+    <h4 style="color:white;">Ensemble:</h4>
+    <ul>
+      <li>Weighted combination of classifiers.</li>
+    </ul>
+    <h4 style="color:white;">Boosting:</h4>
+    <ul>
+      <li>It's a type of ensemblence techique.</li>
+      <li>Focuses on the examples which are wrongly classified.</li>
+      <li>Trains sequentially.</li>
+      <li>A a complex classifier is formed from the weighted combination of these weak learners forms.</li>
+    <ul>
+  </div>
+
+  <div class="ppt" id = "impl">
+    <h2>Implementation:</h2><br>
+    <p>for i=1:Nboost</p>
+    <div style="line-height:6px;position:relative;left:30px;">
+      <pre>C{i} = train(X,Y,wts);      <span style="color:green;">% Train a weighted classifier</span></pre>
+      <Pre>Yhat = predict(C{i},X);     <span style="color:green;">% compute predictions</span></pre>
+      <pre>e = wts*(Y~=Yhat);         <span style="color:green;">% compute weighted error rate</span></pre>
+      <pre>alpha(i) = .5 log(1-e)/e;    <span style="color:green;">% compute coefficient</span></pre>
+      <pre>wts *= exp(-alpha(i)*Y*Yhat); <span style="color:green;">% Update weights</span></pre>
+      <pre>wts = wts/sum(wts);</pre>
+    </div>
+    <p>end;</p>
+    <p style="color:green;">% reFinal classifier: </p>
+    <p>( \sum alpha(i)*predict(C{i},Xtest) ) > 0</p>
+  </div>
+
+  <div class="ppt" id = "cs">
+    <h2>Cost sensitive:</h2><br>
+    <p>Model learns from the data by reducing the loss due to wrong prediction.</p>
+    <h3>Loss:</h3>
+    <p>It is the measure of  difference between the predictor output to actual output.</p>
+  </div>
+
+  <div class="ppt" id = "encode">
+    <h2>One class classification (Auto encoders):</h2><br>
+    <ul>
+      <li>An autoencoder  neural network is an unsupervised learning algorithm.</li>
+      <li>The autoencoder tries to learn a function hW,b(x)≈x.</li>
+      <li>Let input image:(10X10)  , input neurons are 100. </li>
+      <li>Hidden layer : 40 neurons.</li>
+      <li>Now the network is forced to learn the compressed representation.</li>
+      <li>So this helps the network to extract  features without any labels.</li>
+    </ul>
+  </div>
+
+  <div class="ppt" id = "ocs">
+    <h2>One class classification:</h2><br>
+    <ul>
+      <li>1st each autoencoder trained for each class.</li>
+      <li>Vote Network is trained based on loss by each classifier.</li>
+    </ul>
+  </div>
+
   <div id="pop">
     <img id="pic" style="width:600px;height:600px;position:relative;left:35px;top:8px;">
   </div>
@@ -32,5 +267,6 @@
   </div>
   <img id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
   <p id="butt" onclick="runs()">run</p>
+  <p id="input" style="left:230px;" onclick="upload()">input</p>
 </body>
 </html>
